@@ -6,7 +6,7 @@
       <UserCreate :axios="$axios" />
       <UserUpdate :axios="$axios" />
       <UserPatch :axios="$axios" />
-      <UserDelete :axios="$axios" @onUserDeleted="fetchUsers" />
+      <!-- <UserDelete :axios="$axios" @onUserDeleted="fetchUsers" /> -->
     </v-main>
   </v-app>
 </template>
@@ -17,7 +17,7 @@ import UserById from './components/UserByID.vue';
 import UserCreate from './components/UserCreate.vue';
 import UserUpdate from './components/UserUpdate.vue';
 import UserPatch from './components/UserPatch.vue';
-import UserDelete from './components/UserDelete.vue';
+// import UserDelete from './components/UserDelete.vue';
 
 export default {
   name: 'App',
@@ -28,7 +28,7 @@ export default {
     UserCreate,
     UserUpdate,
     UserPatch,
-    UserDelete,
+    // UserDelete,
   },
 
   data() {

@@ -18,6 +18,11 @@
           <td>{{ item.surname }}</td>
           <td>{{ item.phone }}</td>
           <td>{{ item.email }}</td>
+          <td>
+              <v-btn @click="deleteUser(item.id)" icon>
+                <v-icon icon="md:gavel"></v-icon>
+              </v-btn>
+            </td>
         </tr>
     </v-col>
   </v-container>
@@ -43,6 +48,14 @@ export default {
         console.error("Error fetching users:", error);
       }
     },
+    async deleteUser(userId) {
+    try {
+      await this.$axios.delete(`http://localhost:3000/users/${userId}`);
+      this.fetchUsers();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  },
     async sortUsers(sortOrder) {
       console.log(sortOrder);
       try {
