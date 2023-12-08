@@ -1,22 +1,30 @@
 <template>
   <v-container>
-    <v-col class="user-col">
-      <div class="title">
-        <v-text>USERS</v-text>
-      </div>
+    <v-row>
+      <v-col>
+        <div class="title">
+          <v-text>USERS</v-text>
+        </div>
+        <v-btn @click="sortUsers('asc')">Sort Ascending</v-btn>
+        <v-btn @click="sortUsers('desc')">Sort Descending</v-btn>
+        <v-btn @click="fetchUsers">Clear Sorting</v-btn>
+      </v-col>
+    </v-row>
 
+    <v-col class="user-col">
       <tbody>
         <tr v-for="item in users" :key="item.id" class="user-row">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
+          <td>{{ item.surname }}</td>
           <td>{{ item.phone }}</td>
           <td>{{ item.email }}</td>
-          <td>{{ item.surname }}</td>
         </tr>
       </tbody>
     </v-col>
   </v-container>
 </template>
+
 
 <script>
 export default {
@@ -37,9 +45,19 @@ export default {
         console.error("Error fetching users:", error);
       }
     },
+    async sortUsers(sortOrder) {
+      console.log(sortOrder);
+      try {
+        const response = await this.$axios.get(`http://localhost:3000/filter/${sortOrder}`);
+        this.users = response.data;
+      } catch (error) {
+        console.error(`Error sorting users ${sortOrder}:`, error);
+      }
+    },
   },
 };
 </script>
+
 
 <style>
 tr {
@@ -55,7 +73,7 @@ tr {
 
 .title {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 .user-row:hover {
   background-color: #620000;

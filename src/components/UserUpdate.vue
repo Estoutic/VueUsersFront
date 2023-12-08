@@ -57,6 +57,7 @@ export default {
       } catch (error) {
         console.error("Error updating user:", error);
       }
+      window.location.reload();
     },
   },
 };
