@@ -41,21 +41,18 @@ export default {
   methods: {
     async updateUser() {
       try {
-        if (!isNaN(this.userId)) {
-          const userId = parseInt(this.userId);
 
-          await this.$axios.patch(`http://localhost:3000/users/${userId}`, {
-            field: this.selectedField,
-            value: this.updatedUser[this.selectedField],
-          });
+        await this.$axios.patch(`http://localhost:3000/users/${this.userId}`, {
+          field: this.selectedField,
+          value: this.updatedUser[this.selectedField],
+        });
 
-          window.location.reload();
-        } else {
-          console.error("Invalid User ID");
-        }
       } catch (error) {
         console.error("Error updating user:", error);
       }
+      finally{
+    window.location.reload();
+  }
     },
   },
 };

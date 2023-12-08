@@ -12,7 +12,6 @@
     </v-row>
 
     <v-col class="user-col">
-      <tbody>
         <tr v-for="item in users" :key="item.id" class="user-row">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
@@ -20,7 +19,6 @@
           <td>{{ item.phone }}</td>
           <td>{{ item.email }}</td>
         </tr>
-      </tbody>
     </v-col>
   </v-container>
 </template>
@@ -60,15 +58,27 @@ export default {
 
 
 <style>
+
+.custom-tbody {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+td{
+  text-align: center;
+}
+
 tr {
   background-color: #891e1e;
   color: white;
   font-size: large;
   padding: 10px;
   display: flex;
+  width: 100%;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: space-evenly;
+  text-align: center;
 }
 
 .title {
@@ -93,5 +103,9 @@ tr {
 .v-data-table-header {
   background-color: #2196f3;
   color: white;
+}
+
+tbody{
+  flex: 1;
 }
 </style>
