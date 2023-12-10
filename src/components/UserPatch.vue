@@ -46,13 +46,11 @@ export default {
           field: this.selectedField,
           value: this.updatedUser[this.selectedField],
         });
+        window.location.reload();
 
       } catch (error) {
         console.error("Error updating user:", error);
       }
-      finally{
-    window.location.reload();
-  }
     },
   },
 };

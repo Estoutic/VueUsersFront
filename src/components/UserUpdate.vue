@@ -54,11 +54,11 @@ export default {
             },
           }
         );
+        window.location.reload();
+
       } catch (error) {
         console.error("Error updating user:", error);
-      } finally {
-        window.location.reload();
-      }
+      } 
     },
   },
 };
