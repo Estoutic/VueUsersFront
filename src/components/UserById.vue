@@ -17,9 +17,9 @@
         <tr v-if="searchResult">
           <td>{{ searchResult.id }}</td>
           <td>{{ searchResult.name }}</td>
+          <td>{{ searchResult.surname }}</td>
           <td>{{ searchResult.phone }}</td>
           <td>{{ searchResult.email }}</td>
-          <td>{{ searchResult.surname }}</td>
         </tr>
         <v-text v-else> No user found</v-text>
       </v-col>
@@ -50,5 +50,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
