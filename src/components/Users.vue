@@ -12,22 +12,19 @@
     </v-row>
 
     <v-col class="user-col">
-        <tr v-for="item in users" :key="item.id" class="user-row">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.surname }}</td>
-          <td>{{ item.phone }}</td>
-          <td>{{ item.email }}</td>
-          <td>
-              <v-btn @click="deleteUser(item.id)" icon>
-                <v-icon icon="md:gavel"></v-icon>
-              </v-btn>
-            </td>
-        </tr>
+      <tr v-for="item in users" :key="item.id" class="user-row">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.surname }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.email }}</td>
+        <td>
+          <v-btn @click="deleteUser(item.id)" text> X </v-btn>
+        </td>
+      </tr>
     </v-col>
   </v-container>
 </template>
-
 
 <script>
 export default {
@@ -49,17 +46,18 @@ export default {
       }
     },
     async deleteUser(userId) {
-    try {
-      await this.$axios.delete(`http://localhost:3000/users/${userId}`);
-      this.fetchUsers();
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
-  },
-    async sortUsers(sortOrder) {
-      console.log(sortOrder);
       try {
-        const response = await this.$axios.get(`http://localhost:3000/filter/${sortOrder}`);
+        await this.$axios.delete(`http://localhost:3000/users/${userId}`);
+        this.fetchUsers();
+      } catch (error) {
+        console.error("Error deleting user:", error);
+      }
+    },
+    async sortUsers(sortOrder) {
+      try {
+        const response = await this.$axios.get(
+          `http://localhost:3000/users?sort=${sortOrder}`
+        );
         this.users = response.data;
       } catch (error) {
         console.error(`Error sorting users ${sortOrder}:`, error);
@@ -69,16 +67,14 @@ export default {
 };
 </script>
 
-
 <style>
-
 .custom-tbody {
   width: 100%;
   height: 100%;
   overflow-y: auto;
 }
 
-td{
+td {
   text-align: center;
 }
 
@@ -118,7 +114,7 @@ tr {
   color: white;
 }
 
-tbody{
+tbody {
   flex: 1;
 }
 </style>
