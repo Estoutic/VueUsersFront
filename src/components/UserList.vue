@@ -10,8 +10,13 @@
 
     <v-row>
       <v-col>
-        <v-data-table item-key="id">
-          <v-row v-for="item in this.users" :key="item.id" >
+        <v-data-table :headers="headers" :items="users" item-key="id">
+            <v-row>
+              <v-col v-for="header in headers" :key="header.value">
+                  {{ header.text }}
+              </v-col>
+            </v-row>
+          <v-row v-for="item in users" :key="item.id">
             <v-col>{{ item.id }}</v-col>
             <v-col>{{ item.name }}</v-col>
             <v-col>{{ item.surname }}</v-col>
@@ -34,6 +39,15 @@ export default {
   data() {
     return {
       users: [],
+      headers: [
+        { text: 'ID', value: 'id' },
+        { text: 'Name', value: 'name' },
+        { text: 'Surname', value: 'surname' },
+        { text: 'Phone', value: 'phone' },
+        { text: 'Email', value: 'email' },
+        { text: '', value: '' },
+
+      ],
     };
   },
   mounted() {
