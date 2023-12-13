@@ -41,6 +41,8 @@ export default {
     };
   },
   methods: {
+    // обновления поля юзера
+
     async updateUser() {
       try {
         await axios.put(

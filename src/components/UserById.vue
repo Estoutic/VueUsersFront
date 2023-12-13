@@ -36,6 +36,7 @@ export default {
     };
   },
   methods: {
+    // получение юзера по id
     async searchUser() {
       try {
         console.log(this.searchId);

@@ -34,6 +34,7 @@ export default {
     };
   },
   methods: {
+      // метод на создание юзера в бд 
     async createUser() {
       try {
         await axios.post("http://localhost:3111/user", this.newUser);

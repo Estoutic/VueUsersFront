@@ -2,6 +2,8 @@
   <v-container>
     <v-row>
       <v-col>
+        <!-- кнопки на сортировку списка -->
+
         <v-btn @click="sortUsers('asc')">Sort Ascending</v-btn>
         <v-btn @click="sortUsers('desc')">Sort Descending</v-btn>
         <v-btn @click="fetchUsers">Clear Sorting</v-btn>
@@ -10,12 +12,14 @@
 
     <v-row>
       <v-col>
+        <!-- отрисовка списка пользователей -->
+
         <v-data-table :headers="headers" :items="users" item-key="id">
-            <v-row>
-              <v-col v-for="header in headers" :key="header.value">
-                  {{ header.text }}
-              </v-col>
-            </v-row>
+          <v-row>
+            <v-col v-for="header in headers" :key="header.value">
+              {{ header.text }}
+            </v-col>
+          </v-row>
           <v-row v-for="item in users" :key="item.id">
             <v-col>{{ item.id }}</v-col>
             <v-col>{{ item.name }}</v-col>
@@ -39,17 +43,19 @@ export default {
   data() {
     return {
       users: [],
+      // заголовки для таблицы юзеров
       headers: [
-        { text: 'ID', value: 'id' },
-        { text: 'Name', value: 'name' },
-        { text: 'Surname', value: 'surname' },
-        { text: 'Phone', value: 'phone' },
-        { text: 'Email', value: 'email' },
-        { text: '', value: '' },
-
+        { text: "ID", value: "id" },
+        { text: "Name", value: "name" },
+        { text: "Surname", value: "surname" },
+        { text: "Phone", value: "phone" },
+        { text: "Email", value: "email" },
+        { text: "", value: "" },
       ],
     };
   },
+  // получение юзеров со старта
+
   mounted() {
     this.fetchUsers();
   },
@@ -62,6 +68,7 @@ export default {
         console.error("Error fetching users:", error);
       }
     },
+    // метод на удаления юзера из бд
     async deleteUser(userId) {
       try {
         await axios.delete(`http://localhost:3111/users/${userId}`);

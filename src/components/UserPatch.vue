@@ -31,6 +31,7 @@ export default {
     };
   },
   methods: {
+    // обновление юзера в бд 
     async updateUser() {
       try {
         await axios.patch(`http://localhost:3111/users/${this.userId}`, {
