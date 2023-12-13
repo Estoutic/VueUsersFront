@@ -2,9 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <div class="title">
-          <v-text>Update User</v-text>
-        </div>
+        <v-text>Update User</v-text>
         <v-form @submit.prevent="updateUser">
           <v-text-field v-model="userId" label="User ID"></v-text-field>
           <v-select
@@ -12,10 +10,7 @@
             :items="fields"
             label="Select Field to Update"
           ></v-select>
-          <v-text-field
-            v-model="updatedUser[selectedField]"
-            label="New Value"
-          ></v-text-field>
+          <v-text-field v-model="fieldValue" label="New Value"></v-text-field>
           <v-btn type="submit">Update</v-btn>
         </v-form>
       </v-col>
@@ -24,30 +19,25 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
       userId: "",
       selectedField: "",
       fields: ["name", "phone", "surname", "email"],
-      updatedUser: {
-        name: "",
-        phone: "",
-        email: "",
-        surname: "",
-      },
+      fieldValue: "",
     };
   },
   methods: {
     async updateUser() {
       try {
-
-        await this.$axios.patch(`http://localhost:3000/users/${this.userId}`, {
+        await axios.patch(`http://localhost:3111/users/${this.userId}`, {
           field: this.selectedField,
-          value: this.updatedUser[this.selectedField],
+          value: this.fieldValue,
         });
         window.location.reload();
-
       } catch (error) {
         console.error("Error updating user:", error);
       }
@@ -55,11 +45,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-v-text {
-  font-size: larger;
-  font-weight: 700;
-  text-align: center;
-}
-</style>

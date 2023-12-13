@@ -2,9 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <div class="title">
-          <v-text>Search User by ID</v-text>
-        </div>
+        <v-text>Search User by ID</v-text>
 
         <v-text-field v-model="searchId" label="Enter User ID"></v-text-field>
         <v-btn @click="searchUser">Search</v-btn>
@@ -14,20 +12,22 @@
     <v-row>
       <v-col>
         <v-text>Result </v-text>
-        <tr v-if="searchResult">
-          <td>{{ searchResult.id }}</td>
-          <td>{{ searchResult.name }}</td>
-          <td>{{ searchResult.surname }}</td>
-          <td>{{ searchResult.phone }}</td>
-          <td>{{ searchResult.email }}</td>
-        </tr>
+        <v-row v-if="searchResult">
+          <v-col>{{ searchResult.id }}</v-col>
+          <v-col>{{ searchResult.name }}</v-col>
+          <v-col>{{ searchResult.surname }}</v-col>
+          <v-col>{{ searchResult.phone }}</v-col>
+          <v-col>{{ searchResult.email }}</v-col>
+        </v-row>
         <v-text v-else> No user found</v-text>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
+÷
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -38,8 +38,9 @@ export default {
   methods: {
     async searchUser() {
       try {
-        const response = await this.$axios.get(
-          `http://localhost:3000/users/${this.searchId}`
+        console.log(this.searchId);
+        const response = await axios.get(
+          `http://localhost:3111/users/${this.searchId}`
         );
         this.searchResult = response.data;
       } catch (error) {

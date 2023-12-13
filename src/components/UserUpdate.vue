@@ -2,9 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <div class="title">
-          <v-text>Update User</v-text>
-        </div>
+        <v-text>Update User</v-text>
         <v-form @submit.prevent="updateUser">
           <v-text-field v-model="userId" label="User ID"></v-text-field>
           <v-text-field v-model="updatedUser.name" label="Name"></v-text-field>
@@ -28,6 +26,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -43,31 +43,15 @@ export default {
   methods: {
     async updateUser() {
       try {
-        console.log(this.userId);
-        console.log(this.updatedUser);
-        await this.$axios.put(
-          `http://localhost:3000/users/${this.userId}`,
-          this.updatedUser,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+        await axios.put(
+          `http://localhost:3111/users/${this.userId}`,
+          this.updatedUser
         );
         window.location.reload();
-
       } catch (error) {
         console.error("Error updating user:", error);
-      } 
+      }
     },
   },
 };
 </script>
-
-<style>
-v-text {
-  font-size: larger;
-  font-weight: 700;
-  text-align: center;
-}
-</style>
